@@ -1,0 +1,54 @@
+\section{Introduction}
+
+Development of product families rather than individual products is a goal for
+many engineering companies. Product Line Engineering (PLE) is a widely used
+approach for reaching this goal. It is common and accepted for electronic and
+mechanical developments and thus especially important for the automotive
+industry that historically comes from this area~\cite{bookssp19X19}. However,
+for quite some time the automotive industry is constantly moving its focus
+towards the development of software. This development is still ongoing and
+becomes more and more complex each year~\cite{ICSE03498}. In order to stay
+competitive in the future and to realize a competitive advantage, a fast
+adaption to the market and to customer needs is also required for software.
+Offering off-the-shelf software products with tailored customer features will
+increase the company's revenue. Fortunately PLE has also been applied to
+software engineering for many years already in the form of Software Product
+Lines (SPL)~\cite{confsplc2000}. An SPL increases reusability~\cite{Clem02a} and
+therefore increases quality and decreases development costs of software by
+building up shared core assets and customer-specific functionality. With this
+reuse in place, a business will be able to do larger scaling, with higher number
+of projects the development costs will drastically decrease compared to
+traditional engineering methods and the time-to-market will improve due to less
+development effort~\cite{confsplcAzanzaMD21}. Thus an SPL is one possible
+solution to win against competitors.
+
+But even after years of research, source code migrations to SPL are still
+complicated and there are no bullet proof concepts available that are applicable
+to actively running projects with tight release plans. Much research has been
+done on product line architectures~\cite{Svahnberg1999EPLA,
+confsplcTomashchukLJ21} and system engineering \cite{confsplcSchaferBAKR21},
+about feature model migrations~\cite{ncstrlustuttgartfiINPROC200185,
+confsplcGrunerBKR20, confsplcDuszynskiDB19, confsplcFritschAR20}, SPL
+evolution~\cite{journalssmrQuintonVRBGS21, Svahnberg1999ESPL, Eise02b,
+kconfigKernel} and safety aspects~\cite{confsplcWolschke0SAM19} of SPLs. On the
+other hand, \cite{confoopslaHetrickKM06} and \cite{confsplcAbbasJLESS20} have
+written about the overall process, general benefits and a change of mindset,
+but not specifically about source code. Contrary to \cite{confsplcRubinCC13},
+cloned variants are no option for us anymore. The authors of
+\cite{Krueger2001SMC} reported different migration strategies more than 20 years
+ago already: (1) proactive, (2) extractive and (3) reactive, but no work
+described a mixture of extractive and reactive migrations, which we needed.
+Inspired by the work of \cite{confsplcJepsenDB07} we aim for a strategy with
+which we are able to migrate multiple repositories to a monorepo, allowing
+developers and software product managers to proceed with their own pace and
+according to the project plan without risking its deadlines and always being
+able to do a step backwards if neccessary.
+
+In this paper we propose an iterative and incremental migration strategy in
+three steps. We structured the paper in the following way: Section two stating
+the challenges we faced in our projects and industry to explain our view on the
+problem and why standard solutions did not work for us, section three explaining
+our three step solution of the source code migration in detail, presenting
+infrastructure and build system ideas and section four presenting our
+conclusion, an overview on where we stand right now and giving a forecast on
+future work.

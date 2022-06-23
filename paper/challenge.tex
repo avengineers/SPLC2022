@@ -1,0 +1,76 @@
+\section{Challenge}
+
+Our migration method is supposed to be a generic solution for a migration from a
+polyrepo project landscape to a monorepo SPL, but our circumstances might have
+some influence on the ideas that we share in this paper. This section will
+explain the challenges we had, both coming from the products' nature and its
+industry and also from our corporate processes and strategies.
+
+The projects that we migrated are in the area of electric cars for premium
+automobile manufacturers. The software is written in (Embedded) C and Matlab and
+modelled with AUTomotive Open System ARchitecture (AUTOSAR) with C code
+generators. These projects must fulfill Automotive Software Process Improvement
+and Capability Determination (ASPICE), ISO26262 and other processes, standards
+and regulations of the automotive industry during their development phases to
+stay competitive and meet legal requirements. A company will less likely get a
+new inquiry when the standards and norms are not fulfilled. The standards are
+relevant for the entire SPL development and do not only apply for the delivered
+software product, but also for supporting processes and tools like the build
+system. Additionally, the build system must be able to handle third party source
+code deliveries without modifications. One example for this are AUTOSAR
+deliveries. The dependency to a delivered AUTOSAR package is not only a
+challenge for the toolchain, but also a chance. Due to AUTOSAR's layered
+architecture and its interface and component design, it already provides modular
+abstraction for separation of concerns, that can help in building SPL core
+assets and to maximize functional reuse.
+
+All migrated projects of our SPL base on the same product, a complex sensor
+cluster. For historic reasons every (customer) project was managed as a separate
+Dimensions repository. Dimensions is a Source Code Management (SCM) system
+similar to Revision Control System (RCS) used at the Marquardt GmbH for source
+code administration and project documentation. Each individual source code
+repository is a self-contained ready to build project, including all required
+tools and libraries to build the product binaries, like compilers, MSYS and GNU
+Make. The C code was validated with Jenkins nightly builds. Those Jenkins
+scripts were located in separate repositories, not part of the project's
+repository itself. Unit tests were not running with every change of the source
+code as part of CI/CD, but were running on demand.
+
+Whenever a new customer project was kicked-off, it also triggered the start of a
+new software project. This software project then started as a clone of another
+already existing project (`clone-and-own'). This approach had several benefits:
+the setup time was short and because a mature project was taken as basis, the
+project's software was stable already and debugging and adapting was possible.
+There was less work for generic parts and only hardware and customer specific
+modifications were required. However, this approach also caused a lot of
+disadvantages. By simply cloning an existing project there was not only a copy
+of functionality available in the new project, but also a copy of all its flaws.
+Because of a large number of copies a possible refactoring of reused code had to
+be merged back and this meant a high effort. If refactoring is never done, this
+approach can result in software erosion, as it did in our projects. The software
+erosion noticeably led to higher maintenance efforts at the end phase of the
+development and brought up errors late during the product lifecycle. For all the
+teams working in these projects, with the problems mentioned above, the idea of
+migrating to another platform including a new tool chain, not only sounded like
+a mammoth task but unrealistic too, having in mind the tightly planned release
+schedules.
+
+With our migration to SPL we try to tackle as many as possible of the mentioned
+challenges. The migration is only partially done and still ongoing, but we did
+not detect major issues so far. At the same time, we managed to:
+\begin{itemize}
+  \item migrate `clone-and-own' sources to our SPL,
+  \item add variant handling capability to the build system,
+  \item replace the outdated SCM system by Git and Bitbucket,
+  \item introduce a CI/CD system,
+  \item introduce a unit test framework as integral part of the development,
+  \item automate the setup of the build environment and reduce the repository size drastically,
+  \item stay compliant with all rules and norms,
+  \item train the team and
+  \item still keep release plans.
+\end{itemize}
+
+We will not write about all solution aspects in this paper. The focus will be
+on the source code migration process and less on the tools, processes and
+performed trainings. Our build system implementation is freely available on
+Github.com~\cite{GithubSPL}.
