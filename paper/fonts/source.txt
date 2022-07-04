@@ -1,0 +1,1 @@
+LateX class "acmart" uses font Libertine. Got it from here: https://libertine-fonts.org/
