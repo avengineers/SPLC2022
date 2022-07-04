@@ -7,7 +7,7 @@
 * Einzelne schritte der transformation
 * Transformer.py
 
-## Continuous integration and deployment … Product line testing, verification, and validation: CI --> no pipeline, local tests, vielleicht auch variant specific tests
+## Continuous integration and deployment … Product line testing, verification, and validation: CI --> no pipeline, local tests, vielleicht auch variant-specific tests
 
 * Also statt zentral die selftests abzulegen, sie auch variantenspezifisch zu machen. Dann ist der test beim erstellen einer neuen variante gleich mit dabei, pipeline muss nicht geändert werden, nichts zentrales…und varianten können einfacher maturity level abdecken
 * Vielleicht auch eine schmale gui, mit der ich einfach festlegen kann welche varianten ich testen will…oder commandline wieder mit verzeichnissen zeigen
@@ -15,7 +15,7 @@
 
 ## Software ecosystems: SPL with Cmake and VS Code
 
-* Setup --> variant specific
+* Setup --> variant-specific
 * Dependency management (e.g. conan)
 * No MSYS!
 
