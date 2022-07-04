@@ -1,4 +1,4 @@
-\section{Introduction}
+\section{Introduction}\label{introduction}
 
 Development of product families rather than individual products is a goal for
 many engineering companies. Product Line Engineering (PLE) is a widely used
@@ -26,7 +26,7 @@ But even after years of research, source code migrations to SPL are still
 complicated and there are no bullet proof concepts available that are applicable
 to actively running projects with tight release plans. Much research has been
 done on product line architectures~\cite{Svahnberg1999EPLA,
-confsplcTomashchukLJ21} and system engineering \cite{confsplcSchaferBAKR21},
+confsplcTomashchukLJ21} and system engineering~\cite{confsplcSchaferBAKR21},
 about feature model migrations~\cite{ncstrlustuttgartfiINPROC200185,
 confsplcGrunerBKR20, confsplcDuszynskiDB19, confsplcFritschAR20}, SPL
 evolution~\cite{journalssmrQuintonVRBGS21, Svahnberg1999ESPL, Eise02b,
@@ -45,10 +45,10 @@ the project plan without risking its deadlines and always being able to do a
 step backwards if neccessary.
 
 In this paper we propose an iterative and incremental migration strategy in
-three steps. We structured the paper in the following way: Section two stating
-the challenges we faced in our projects and industry to explain our view on the
-problem and why standard solutions did not work for us, section three explaining
-our three step solution of the source code migration in detail, presenting
-infrastructure and build system ideas and section four presenting our
-conclusion, an overview on where we stand right now and giving a forecast on
-future work.
+three steps. We structured the paper in the following way:
+Section~\ref{challenge} stating the challenges we faced in our projects and
+industry to explain our view on the problem and why standard solutions did not
+work for us, section~\ref{solution} explaining our three step solution of the
+source code migration in detail, presenting infrastructure and build system
+ideas and section \ref{conclusion} presenting our conclusion, an overview on
+where we stand right now and giving a forecast on future work.

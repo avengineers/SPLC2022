@@ -1,4 +1,4 @@
-\section{Solution}
+\section{Solution}\label{solution}
 
 Our goal with the migration was to switch the mindset from `my project' to `one
 of our product variants' by enabling the software teams to collaborate in a
@@ -44,7 +44,7 @@ and just configured as external build dependencies in several product families.
   \label{fig:threeMigrationSteps}
 \end{figure*}
 
-\subsection{Complexity Reduction}
+\subsection{Complexity Reduction}\label{complexity}
 
 Our first step towards SPL consisted of importing several active sensor projects into
 the SPL, i.e., adding Dimension repository product variants into one structured Git
@@ -87,25 +87,25 @@ within the third migration step.
 
 The structure after the transformation looks like this:
 \begin{Verbatim}[frame=single,samepage=true]
-.vscode/
+  .vscode/
   cmake-kits.json
   cmake-variants.json
   settings.json
-legacy/
+  legacy/
   variant-a/
-    component-1/
-    component-2/
+  component-1/
+  component-2/
   variant-b/
-    component-1/
-src/
-variants/
+  component-1/
+  src/
+  variants/
   variant-a/
-    config.cmake
-    parts.cmake
+  config.cmake
+  parts.cmake
   variant-b/
-    config.cmake
-    parts.cmake
-CMakeLists.txt
+  config.cmake
+  parts.cmake
+  CMakeLists.txt
 \end{Verbatim}
 
 The `legacy' directory contains all the projects' unmodified source code
@@ -120,7 +120,7 @@ centralized deployment with our CI/CD system, start learning to use Git as
 source code management system and reducing complexity by reducing the number of
 systems: polyrepo vs.\ monorepo with a single build system and tool environment.
 
-\subsection{Modularization}
+\subsection{Modularization}\label{modularization}
 
 As soon as all developers, software project managers and integrators are used to
 the outcome of the first step of the SPL migration, the \textit{Modularization}
@@ -167,21 +167,21 @@ not belong to a variant, but to the entire product. In this step, components are
 just moved into a generic source directory. The folder structure will change
 from:
 \begin{Verbatim}[frame=single,samepage=true]
-legacy/
+  legacy/
   variant-a/
-    component-1/
-    component-2/
+  component-1/
+  component-2/
   variant-b/
-    component-1/
+  component-1/
 \end{Verbatim}
 to:
 \begin{Verbatim}[frame=single,samepage=true]
-src/
+  src/
   component-1/
-    variant-a/
-    variant-b/
+  variant-a/
+  variant-b/
   component-2/
-    variant-a/
+  variant-a/
 \end{Verbatim}
 By doing this, all variants of one component, with the identical or very similar
 functionality, are moved to the same directory. Variants of a component residing
@@ -238,7 +238,7 @@ by the developer. Using features will generate many possibilities to configure
 the software. Written unit tests should use the same features to enable/disable
 tests or expectations in order to cover all possible execution paths.
 
-\subsection{Versioned Dependency Management}
+\subsection{Versioned Dependency Management}\label{dependencies}
 
 In an SPL we talk about at least two variation dimensions: space,
 time~\cite{appliedSPLE} and sometimes also maturity~\cite{bigleverwhitepaper}.
@@ -322,7 +322,7 @@ check easier. An application software component should only have interfaces to
 the Run-Time Environment (RTE), so based on the RTE configuration a
 compatibility between components should be clearly defined.
 
-\textbf{Cross-product component reuse:} Independant of an SPL introduction, it
+\textbf{Cross-product component reuse:} Independent of an SPL introduction, it
 is most likely that within the product portfolio of an automotive supplier like
 Marquardt with a wide range of different products, those products share similar
 components and solutions. When such a company applies SPL engineering for one of
