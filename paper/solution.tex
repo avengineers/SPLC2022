@@ -87,25 +87,25 @@ within the third migration step.
 
 The structure after the transformation looks like this:
 \begin{Verbatim}[frame=single,samepage=true]
-  .vscode/
+.vscode/
   cmake-kits.json
   cmake-variants.json
   settings.json
-  legacy/
+legacy/
   variant-a/
-  component-1/
-  component-2/
+    component-1/
+    component-2/
   variant-b/
-  component-1/
-  src/
-  variants/
+    component-1/
+src/
+variants/
   variant-a/
-  config.cmake
-  parts.cmake
+    config.cmake
+    parts.cmake
   variant-b/
-  config.cmake
-  parts.cmake
-  CMakeLists.txt
+    config.cmake
+    parts.cmake
+CMakeLists.txt
 \end{Verbatim}
 
 The `legacy' directory contains all the projects' unmodified source code
@@ -167,21 +167,21 @@ not belong to a variant, but to the entire product. In this step, components are
 just moved into a generic source directory. The folder structure will change
 from:
 \begin{Verbatim}[frame=single,samepage=true]
-  legacy/
+legacy/
   variant-a/
-  component-1/
-  component-2/
+    component-1/
+    component-2/
   variant-b/
-  component-1/
+    component-1/
 \end{Verbatim}
 to:
 \begin{Verbatim}[frame=single,samepage=true]
-  src/
+src/
   component-1/
-  variant-a/
-  variant-b/
+    variant-a/
+    variant-b/
   component-2/
-  variant-a/
+    variant-a/
 \end{Verbatim}
 By doing this, all variants of one component, with the identical or very similar
 functionality, are moved to the same directory. Variants of a component residing
