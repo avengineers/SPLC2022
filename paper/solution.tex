@@ -16,6 +16,7 @@ consists of three consecutive steps as depicted in Figure~\ref{fig:migrationFlow
   \centering
   \includegraphics[width=1\columnwidth]{migration-steps-overview.pdf}
   \caption{Migration Flow Overview}
+  \Description{Migration Flow Overview showing the three proposed migration steps}
   \label{fig:migrationFlow}
 \end{figure}
 
@@ -31,17 +32,22 @@ If one step is accomplished for a variant or a component, the migration of that
 specific variant or component can iteratively proceed with the next migration
 step.
 
-The content of the SPL repository will change during the different migration
-steps. As shown in Figure~\ref{fig:threeMigrationSteps} the size of legacy code
-will first increase with every legacy project added to the codebase, then legacy
-code will be exchanged with configurable sources over time, and finally even
-configurable sources will decrease, as they are moved to a separate repository
-and just configured as external build dependencies in several product families.
+The content of the SPL repository, especially the number of lines of code (LOC),
+will change during the different migration steps as shown in
+Figure~\ref{fig:threeMigrationSteps}. In the first migration step
+\textit{Complexity Reduction} the LOC will increase with every legacy project
+added to the codebase. During \textit{Modularization} legacy code will be
+exchanged with configurable sources leading to a reduction of duplicated code
+and therefore to a decreased LOC.\@ Finally even the LOC of configurable sources
+in the SPL repository will decrease, as the sources are isolated and moved to a
+separate repository and just configured as external build dependencies in
+several product families.
 
 \begin{figure*}[ht]
   \centering
   \includegraphics[width=1.55\columnwidth]{migration_steps.pdf}
   \caption{Three Migration Steps to SPL}
+  \Description{Three Migration Steps to SPL}
   \label{fig:threeMigrationSteps}
 \end{figure*}
 
@@ -76,7 +82,7 @@ of a legacy project into a new product variant is divided into four parts:
 
 Switching from variant-specific repositories in Dimensions to a single Git
 repository in Bitbucket causes a high workflow impact for the developers.
-Additionally they need to get used to an SPL build system and a new IDE.
+Additionally they need to get used to an SPL build system and a new IDE.\@
 Therefore, we decided not to change the production source code during this first
 migration step so that the developers can continue to work in their well-known
 code basis.
@@ -156,6 +162,7 @@ Figure~\ref{fig:step2Modularization} and will be further described in detail:
   \centering
   \includegraphics[width=1.0\columnwidth]{step2-modularization-flow.pdf}
   \caption{Detailed stages of the \textit{Modularization} step.}
+  \Description{Detailed stages of the Modularization step.}
   \label{fig:step2Modularization}
 \end{figure}
 
