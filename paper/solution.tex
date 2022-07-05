@@ -40,8 +40,9 @@ added to the codebase. During \textit{Modularization} legacy code will be
 exchanged with configurable sources leading to a reduction of duplicated code
 and therefore to a decreased LOC.\@ Finally even the LOC of configurable sources
 in the SPL repository will decrease, as the sources are isolated and moved to a
-separate repository and just configured as external build dependencies in
-several product families.
+separate repository during the third step \textit{Versioned Dependency
+Management}. Then those configurable sources will just be configured as external
+build dependencies in several product families.
 
 \begin{figure*}[ht]
   \centering
@@ -87,11 +88,11 @@ Therefore, we decided not to change the production source code during this first
 migration step so that the developers can continue to work in their well-known
 code basis.
 
-The DevOps Handbook~\cite{devopshandbook} calls this a monolithic approach. They
-positively emphasize the simplicity and resource efficiency in small scale, but
-mention the drawback of overall poor scaling and weak modularization
+The DevOps Handbook~\cite{devopshandbook} calls this a monolithic approach and
+positively emphasizes the simplicity and resource efficiency in small scale. It
+also mentions the drawbacks of overall poor scaling and weak modularization
 capabilities. We are aware of those drawbacks and are going to tackle them
-within the third migration step.
+within the third migration step \textit{Versioned Dependency Management}.
 
 The structure after the transformation looks like this:
 \begin{Verbatim}[frame=single,samepage=true]
