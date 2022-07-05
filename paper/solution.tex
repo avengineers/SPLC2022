@@ -74,11 +74,12 @@ of a legacy project into a new product variant is divided into four parts:
         validation for every source code change.
 \end{enumerate}
 
-Because switching from variant-specific repositories in Dimensions to a single
-Git repository in Bitbucket and introducing an SPL build system, as well as a
-new IDE caused a high workflow impact for the developers, we decided not to
-change the production source code so that the software developers could continue
-to work in their well-known code basis.
+Switching from variant-specific repositories in Dimensions to a single Git
+repository in Bitbucket causes a high workflow impact for the developers.
+Additionally they need to get used to an SPL build system and a new IDE.
+Therefore, we decided not to change the production source code during this first
+migration step so that the developers can continue to work in their well-known
+code basis.
 
 The DevOps Handbook~\cite{devopshandbook} calls this a monolithic approach. They
 positively emphasize the simplicity and resource efficiency in small scale, but
