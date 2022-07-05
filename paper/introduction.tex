@@ -31,18 +31,19 @@ about feature model migrations~\cite{ncstrlustuttgartfiINPROC200185,
 confsplcGrunerBKR20, confsplcDuszynskiDB19, confsplcFritschAR20}, SPL
 evolution~\cite{journalssmrQuintonVRBGS21, Svahnberg1999ESPL, Eise02b,
 kconfigKernel} and safety aspects~\cite{confsplcWolschke0SAM19} of SPLs. On the
-other hand, \cite{confoopslaHetrickKM06} and \cite{confsplcAbbasJLESS20} have
-written about the overall process, general benefits and a change of mindset, but
-not specifically about source code. Contrary to \cite{confsplcRubinCC13}, cloned
-variants are no option for us anymore. The authors of \cite{Krueger2001SMC}
-reported different migration strategies more than 20 years ago already: (1)
-proactive, (2) extractive and (3) reactive, but no work described a mixture of
-extractive and reactive migrations, which we needed. Inspired by the work of
-\cite{confsplcJepsenDB07} we aim for a strategy with which we are able to
-migrate multiple independent repositories to a scalable SPL, allowing developers
-and software product managers to proceed with their own pace and according to
-the project plan without risking its deadlines and always being able to do a
-step backwards if neccessary.
+other hand, Hetrick et al. \cite{confoopslaHetrickKM06} and Abbas et al.
+\cite{confsplcAbbasJLESS20} have written about the overall process, general
+benefits and a change of mindset, but not specifically about source code.
+Contrary to Rubin et al. \cite{confsplcRubinCC13}, cloned variants are no option
+for us anymore. Krueger \cite{Krueger2001SMC} reported different migration
+strategies more than 20 years ago already: (1) proactive, (2) extractive and (3)
+reactive, but no work described a mixture of extractive and reactive migrations,
+which we need for existing and upcoming customer projects. Inspired by the work
+of Jepsen et al. \cite{confsplcJepsenDB07} we aim for a strategy with which we
+are able to migrate multiple independent repositories to a scalable SPL,
+allowing developers and software product managers to proceed with their own pace
+and according to the project plan without risking its deadlines and always being
+able to do a step backwards if neccessary.
 
 In this paper we propose an iterative and incremental migration strategy in
 three steps. We structured the paper in the following way:

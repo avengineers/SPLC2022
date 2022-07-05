@@ -10,7 +10,7 @@ IDE, CMake and Ninja for building all required targets, Powershell and Python as
 build wrapper and CI/CD test runners.
 
 With the help of our SPL implementation we follow a migration strategy that
-consists of three steps as depicted in Figure~\ref{fig:migrationFlow}.
+consists of three consecutive steps as depicted in Figure~\ref{fig:migrationFlow}.
 
 \begin{figure}[htb]
   \centering
@@ -27,8 +27,9 @@ It is important to know though, that each step can be done incrementally:
   \item \textit{Versioned Dependency Management}: component by component.
 \end{itemize}
 
-And as soon as at least one increment is done on the current step, the migration
-can iteratively go to the next migration step.
+If one step is accomplished for a variant or a component, the migration of that
+specific variant or component can iteratively proceed with the next migration
+step.
 
 The content of the SPL repository will change during the different migration
 steps. As shown in Figure~\ref{fig:threeMigrationSteps} the size of legacy code
@@ -144,7 +145,7 @@ open-source and free to use for anyone. Alternative solutions might also solve
 the configuration purpose. Prominent examples are
 pure:variants~\cite{pureVariantsPureSystems} from pure systems or Gears from
 BigLever~\cite{gearsBigLever}. Both tools are known to be highly flexible and
-easy to integrate into existing projects~\cite{incrementalPLE}.
+easy to integrate into existing projects~\cite{confsplcGrunerBKR20}.
 
 Independent of the feature model tool, the modularization process should be the same.
 All stages of the \textit{Modularization} step are visible in
