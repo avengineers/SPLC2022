@@ -106,7 +106,6 @@ legacy/
     component-2/
   variant-b/
     component-1/
-src/
 variants/
   variant-a/
     config.cmake
@@ -118,9 +117,8 @@ CMakeLists.txt
 \end{Verbatim}
 
 The `legacy' directory contains all the projects' unmodified source code
-directories as variant-specific directories. The `src' directory is empty at
-first, it will contain the configurable sources. And the `variants' directory
-contains the variant configuration in terms of compilation and feature model.
+directories as variant-specific directories. The configuration and part lists of
+the variants can be found in the `variants' directory.
 
 Although the build system and tool environment is reused already for all
 variants, for source code there is no reuse in place and the amount of source
@@ -138,24 +136,24 @@ the outcome of the first step of the SPL migration, the \textit{Modularization}
 step can begin. With the following three stages of \textit{Modularization} it is
 possible to switch from a project to a product perspective. Thinking in terms of
 products rather than projects helps to reduce the amount of code and maximizes
-the reuse across all variants. However, in order to properly build up software
-components, consisting of core assets and customer-specific functions, a feature
-model definition is required, allowing a configuration of the different software
-component characteristics. The goal is to merge the different legacy software
-components with similar functionality into configurable sources, keeping
-customer-specific functionality, to maximize reuse and reduce maintenance.
-Although CMake is capable of handling very simple feature models with variables
-and template generators pretty well, a more complex feature model might require
-another tool to manage it. Our recommendation for complex feature model
-configurations is KConfig, `a domain specific language designed specifically for
-coding the Linux kernel variability model'~\cite[page 3]{kconfigKernel}. KConfig
-is able to manage the complex design of the Linux kernel and it has enough
-functionality to work with most embedded applications. Additionally it is
-open-source and free to use for anyone. Alternative solutions might also solve
-the configuration purpose. Prominent examples are
-pure:variants~\cite{pureVariantsPureSystems} from pure systems or Gears from
-BigLever~\cite{gearsBigLever}. Both tools are known to be highly flexible and
-easy to integrate into existing projects~\cite{confsplcGrunerBKR20}.
+the reuse across all variants. In order to build up software components,
+consisting of core assets and variant-specific functionalities, a feature model
+is required for configuring the software and thus controlling the execution
+flow. The goal is to merge the different legacy software components into
+configurable sources, keeping variant-specific functionality, to maximize reuse
+and reduce maintenance effort. Although CMake is capable of handling very simple
+feature models with variables and template generators pretty well, a more
+complex feature model might require another tool to manage it. Our
+recommendation for complex feature model configurations is KConfig, `a domain
+specific language designed specifically for coding the Linux kernel variability
+model'~\cite[page 3]{kconfigKernel}. KConfig is able to manage the complex
+design of the Linux kernel and it has enough functionality to work with most
+embedded applications. Additionally it is open-source and free to use for
+anyone. Alternative solutions might also solve the configuration purpose.
+Prominent examples are pure:variants~\cite{pureVariantsPureSystems} from pure
+systems or Gears from BigLever~\cite{gearsBigLever}. Both tools are known to be
+highly flexible and easy to integrate into existing
+projects~\cite{confsplcGrunerBKR20}.
 
 Independent of the feature model tool, the modularization process should be the same.
 All stages of the \textit{Modularization} step are visible in
@@ -228,8 +226,7 @@ the correct decorators. If a separation into core assets and decorators in
 individual files is not possible or not useful for any reason, another option
 would be to use a feature configuration with conditional preprocessor directives
 or runtime configuration. Toggle points in the code make it possible to select
-different implementations within the same C file. The feature model's job is to
-configure features and control the execution flow.
+different implementations within the same C file.
 
 \textbf{Refactor with focus on variability:} Last but not least, the code should
 be refactored according to variability. This is the first refactoring step which
@@ -244,7 +241,7 @@ We highly encourage to implement unit tests before the refactoring starts, if
 there are no unit tests available already. During this step the availability of
 fast unit tests covering all core assets and features will ensure that no
 functionality was broken and will reduce time in finding errors at a later
-development phase. Even the non-functional refactorings can have huge affects on
+development phase. Even the non-functional refactorings can have huge effects on
 the compiled binaries and change the behavior, even though it was not intended
 by the developer. Using features will generate many possibilities to configure
 the software. Written unit tests should use the same features to enable/disable
