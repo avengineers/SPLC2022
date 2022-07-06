@@ -123,11 +123,13 @@ first, it will contain the configurable sources. And the `variants' directory
 contains the variant configuration in terms of compilation and feature model.
 
 Although the build system and tool environment is reused already for all
-variants, for source code there is no reuse in place, so scaling will become
-problematic. Still there are a lot of advantages with the monolithic way, like
-centralized deployment with our CI/CD system, start learning to use Git as
-source code management system and reducing complexity by reducing the number of
-systems: polyrepo vs.\ monorepo with a single build system and tool environment.
+variants, for source code there is no reuse in place and the amount of source
+code is growing over time as shown in figure \ref{fig:threeMigrationSteps},
+therefore scaling may become problematic. Still there are a lot of advantages
+with the monolithic way, like centralized deployment with our CI/CD system,
+start learning to use Git as source code management system and reducing
+complexity by reducing the number of systems: polyrepo vs.\ monorepo with a
+single build system and tool environment.
 
 \subsection{Modularization}\label{modularization}
 
