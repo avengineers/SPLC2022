@@ -19,30 +19,28 @@ With our proposal we:
         repository.
 \end{itemize}
 
-We implemented a build system with modern CMake fully supporting the concept of
-SPL variants.
-
 At the submission date's point of time we managed to proof about 50\% of our
-concept. The build system prototype required two persons full-time for six
-weeks, the implementation for migration step one and two required two persons
-full-time for three more months. Over a time frame of two months we
-incrementally added ten variants, while each import to the SPL was really fast
-due to the automated importing mechanism. We already started with
+concept. We implemented a build system with modern CMake fully supporting the
+concept of SPL variants. The build system prototype required two persons
+full-time for six weeks, the implementation for migration step one and two
+required two persons full-time for three more months. Over a time frame of two
+months we incrementally added ten variants, while each import to the SPL was
+really fast due to the automated importing mechanism. We already started with
 \textit{Modularization} of software components, but only converted a few
 components and begun with removing duplicates. Recently we focussed more on
 automation than on the SPL migration, as we saw more advantages there in the
 long run. The automation for CI/CD is helpful for the migration as well.
-Nevertheless, the build system requires some more features to be able to handle
-our migration step three and we plan to implement them in the coming months, in
-parallel to the \textit{Modularization} step of the software components.
 
-Additionally to the build system implementation and the actual migration of the
-embedded source code, it is required for us to qualify tools which have an
-impact on the created binaries or the processes to build them. This tool
+Nevertheless, the build system requires more features, e.g., a package manager
+for dependency handling and a unit test framework for Test Driven Development
+(TDD) to be able to support our migration steps two and three and we plan to
+implement them in the coming months, in parallel to the \textit{Modularization}
+of the software components. Additionally it is required to qualify tools which
+have an impact on the created binaries or the processes to build them. This tool
 qualification is requested by the ISO 26262 standard for safety reasons. We must
 take care that CMake, Ninja and KConfig are properly qualified. On the other
 hand, proprietary software might come with safety evaluations already. This
-should be kept in mind, when deciding for your tool landscape.
+should be kept in mind, when deciding for a future tool landscape.
 
 Besides all the discussed technical challenges, there were also social obstacles
 on the way to introduce and SPL.\@ Fear of change was probably the strongest
