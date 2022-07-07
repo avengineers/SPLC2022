@@ -238,14 +238,12 @@ components did not support variant handling and some might require substantial
 refactorings to have a meaningful feature set.
 
 We highly encourage to implement unit tests before the refactoring starts, if
-there are no unit tests available already. During this step the availability of
-fast unit tests covering all core assets and features will ensure that no
-functionality was broken and will reduce time in finding errors at a later
-development phase. Even the non-functional refactorings can have huge effects on
-the compiled binaries and change the behavior, even though it was not intended
-by the developer. Using features will generate many possibilities to configure
-the software. Written unit tests should use the same features to enable/disable
-tests or expectations in order to cover all possible execution paths.
+there are no unit tests available already. Even the non-functional refactorings
+can have effects on the compiled binaries and change the behavior, even though
+it was not intended by the developer. A feature model will generate many
+possibilities to configure the software, therefore unit tests covering all core
+assets and features will ensure that no functionality was broken and will reduce
+time in finding errors at a later development phase.
 
 \subsection{Versioned Dependency Management}\label{dependencies}
 
