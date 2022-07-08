@@ -65,8 +65,8 @@ build dependencies in several product families.
 
 \subsection{Complexity Reduction}\label{complexity}
 
-Our first step towards SPL consisted of importing several active sensor projects
-into the SPL, i.e., adding Dimension repository product variants into one
+Our first step towards SPL consists of importing several active sensor projects
+into the SPL, i.e., adding Dimension rdepository product variants into one
 structured Git repository. To support further incremental imports of additional
 sensor variants we implemented a tool called
 Transformer~\cite{GithubTransformer} that highly automates the necessary import
@@ -151,7 +151,7 @@ and reduce maintenance effort. Thinking in terms of products rather than
 projects helps to reduce the LOC and maximizes the reuse across all variants. In
 order to build up software components, consisting of core assets and
 variant-specific functionalities, a feature model is required for configuring
-the software and thus controlling the execution flow.  Although CMake is capable
+the software and thus controlling the execution flow. Although CMake is capable
 of handling very simple feature models with variables and template generators
 pretty well, a more complex feature model might require another tool to manage
 it. Our recommendation for complex feature model configurations is KConfig, `a
@@ -159,7 +159,7 @@ domain specific language designed specifically for coding the Linux kernel
 variability model'~\cite[page 3]{kconfigKernel}. KConfig is able to manage the
 complex design of the Linux kernel and it has enough functionality to work with
 most embedded applications. Additionally it is open-source and free to use for
-anyone. Alternative solutions might also solve the configuration purpose.
+anyone. Alternative solutions might also fulfill the configuration purpose.
 Prominent examples are pure:variants~\cite{pureVariantsPureSystems} from pure
 systems or Gears from BigLever~\cite{gearsBigLever}. Both tools are known to be
 highly flexible and easy to integrate into existing
@@ -204,13 +204,13 @@ reduction or maintenance effort.
 established in the previous stage, we recommend to clean up duplicate variants.
 Variants of a component are considered as duplicates if their source code is
 identical and no configuration is required. This is a fast and easy step for
-reuse and will not require additional knowledge on a feature model nor on the
+reuse and will not require additional knowledge about a feature model or the
 functionality. Removing duplicates is followed by separating core assets and
 variant-specific functionality with a decorator pattern. The separation can be
 done on a function level and requires static function interface definitions. The
-concept is to create a:
+concept is to create:
 \begin{itemize}
-  \item core asset C file, which contains generic code across all variants,
+  \item a core asset C file, which contains generic code across all variants,
         considered to be static,
   \item a header file with interface descriptions of core assets and decorators,
   \item a decorator C file for every variant, which contains a variant-specific
@@ -248,7 +248,7 @@ later development phase.
 \begin{figure}[htb]
   \centering
   \includegraphics[width=1.0\columnwidth]{step2-modularization-flow.pdf}
-  \caption{Detailed stages of the \textit{Modularization} step.}
+  \caption{Detailed stages of the \textit{Modularization} step}
   \Description{Detailed stages of the Modularization step.}
   \label{fig:step2Modularization}
 \end{figure}
@@ -261,36 +261,35 @@ dimension. By using Git it is already possible to get a variation in time. At
 any created commit, it is possible to create a new branch. This branch can be
 the active development branch with all the latest changes, or it can be based on
 a former commit to represent a baseline of the SPL that is going to be released
-or was released already. If bug fixes are required after a release happened,
-they will be done on the same release branch. With this strategy, releases can
-be done on a stable code basis without the influence of new feature developments
-of other branches. Additionally the documentation of release relevant changes
-becomes simple. The release branch will stay unchanged and usually not get any
-feature updates, but only fixes. But release branches in a monorepo come with
-some drawbacks. It is complicated to get different versions of different
-components. A baseline must be done on the entire software. An integration of
-mixed versions is possible but requires lots of manual effort and will likely
-have a strong negative impact on maintenance. Adding a fix in a component of a
-specific version in a release branch will not become available in the same
-version of the same component in any other branch. All commits and branches are
-independent of each other, so no automatic reuse of code between them is
-available. Therefore using the same component and version provides no reuse in
-the space dimension if we introduce the time dimension like this. And finally
-fixing a bug in a new version, that was spotted in an earlier version, is even
-more complicated, especially across all branches. Our proposal requires some
-more changes to the build system and infrastructure. It is required to split up
-the repository again. With the modularization being done, the split will not be
-done per project anymore, but per software component. Each modularized software
-component will reside in its own repository and is maintained separately. This
-allows us to work with different developers or development teams on different
-software components independently. To enable the development of a software
-component in its own repository the following requirements must be fulfilled:
+or was released already. If bug fixes are required after a release, they will be
+done on the same release branch. With this strategy, releases can be done on a
+stable code basis without the influence of new feature developments of other
+branches. Additionally the documentation of release relevant changes becomes
+simple. The release branch will stay unchanged and usually not get any feature
+updates, but only fixes. But release branches in a monorepo come with some
+drawbacks. It is complicated to get different versions of different components.
+A baseline must be done on the entire software. An integration of mixed versions
+is possible but requires lots of manual effort and will likely have a strong
+negative impact on maintenance. Adding a fix in a component of a specific
+version in a release branch will not become available in the same version of the
+same component in any other branch. All commits and branches are independent of
+each other, so no automatic reuse of code between them is available. Therefore
+using the same component and version provides no reuse in the space dimension if
+we introduce the time dimension like this. And finally fixing a bug in a new
+version, that was spotted in an earlier version, is even more complicated,
+especially across all branches. Our proposal requires some more changes to the
+build system and infrastructure. It is required to split up the repository
+again. With the modularization being done, the split will not be done per
+project anymore, but per software component. Each modularized software component
+will reside in its own repository and is maintained separately. This allows us
+to work with different developers or development teams on different software
+components independently. To enable the development of a software component in
+its own repository the following requirements must be fulfilled:
 \begin{itemize}
   \item component specific requirements specifications,
   \item mocked required interfaces,
   \item unit tests for all component features in all possible configurations,
-  \item software integration tests,
-  \item Software-In-the-Loop (SIL) tests and
+  \item software integration tests and
   \item a software test plan.
 \end{itemize}
 Although this step introduces a polyrepo workflow it still follows the SPL
@@ -310,7 +309,7 @@ variant. The benefits of this approach are the following:
         release loop.
   \item A fix of a buggy version is implemented only once in the component's
         repository.
-  \item Buggy versions can be marked in the components' repositories. This way
+  \item Buggy versions can be marked in the components' repositories. With this
         variant builds containing a buggy version can print a warning or error.
         The integrator can then manually update the version of the dependency or
         justify the warning in regards to their project setup. An automatic
@@ -328,17 +327,18 @@ compatibility between components should be clearly defined.
 
 \textbf{Cross-product component reuse:} Independent of an SPL introduction, it
 is most likely that within the product portfolio of an automotive supplier like
-Marquardt with a wide range of different products, those products share similar
-components and solutions. When such a company applies SPL engineering for one of
-its products, sooner or later the concept is taken over for other products of
-other business units, too. In case the second step of SPL migration
+the Marquardt GmbH with a wide range of different products, those products share
+similar components and solutions. When such a company applies SPL engineering
+for one of its products, sooner or later the concept is taken over for other
+products of other business units, too. In case the second step of SPL migration
 \textit{Modularization} is finished in at least two SPL repositories with
 similar core assets and step three has been performed on a few components, the
 probability, that the need to share those components between the different SPL
 repositories will arise, is rather high. Therefore the third step of our
 migration concept provides an additional useful feature: isolation of
 configurable sources for \textit{Cross-product component reuse}. The idea is
-that the isolated software component and all its variants can be used in multiple
-other SPL repositories, not just in one. There are functionalities, like current
-measurement, that might be useful in a multitude of electronic products. This
-can exponentially increase reuse in the entire product portfolio.
+that the isolated software component and all its variants can be used in
+multiple other SPL repositories, not just in one. There are functionalities,
+e.g., current or voltage measurement, that might be useful in a multitude of
+electronic products. This can exponentially increase reuse in the entire product
+portfolio.
