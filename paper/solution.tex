@@ -47,7 +47,7 @@ The content of the SPL repository, especially the number of lines of code (LOC),
 will change during the different migration steps as shown in
 Figure~\ref{fig:threeMigrationSteps}. In the first migration step
 \textit{Complexity Reduction} the LOC will increase with every legacy project
-added to the codebase. During \textit{Modularization} legacy code will be
+added to the codebase. During \textit{Modularization} legacy sources will be
 exchanged with configurable sources leading to a reduction of duplicated code
 and therefore to a decreased LOC.\@ Finally even the LOC of configurable sources
 in the SPL repository will decrease, as the sources are isolated and moved to a
@@ -128,13 +128,13 @@ variants/
 CMakeLists.txt
 \end{Verbatim}
 
-The `legacy' directory contains all the projects' unmodified source code
-directories as variant-specific directories. The configuration and part lists of
-the variants can be found in the `variants' directory.
+The `legacy' folder contains all the projects' unmodified source code in
+variant-specific folders. The configuration and part lists of the variants can
+be found in the `variants' folder.
 
 Although the build system and tool environment is reused already for all
 variants, for source code there is no reuse in place and the LOC is growing over
-time as shown in figure~\ref{fig:threeMigrationSteps}, therefore scaling may
+time as shown in Figure~\ref{fig:threeMigrationSteps}, therefore scaling may
 become problematic. Still there are a lot of advantages with the monolithic way,
 like centralized deployment with our CI/CD system, start learning to use Git as
 source code management system and reducing complexity by reducing the number of
@@ -144,48 +144,39 @@ systems: polyrepo vs.\ monorepo with a single build system and tool environment.
 
 As soon as all developers, software project managers and integrators are used to
 the outcome of the first step of the SPL migration, the \textit{Modularization}
-step can begin. With the following three stages of \textit{Modularization} it is
-possible to switch from a project to a product perspective. Thinking in terms of
-products rather than projects helps to reduce the LOC and maximizes the reuse
-across all variants. In order to build up software components, consisting of
-core assets and variant-specific functionalities, a feature model is required
-for configuring the software and thus controlling the execution flow. The goal
-is to merge the different legacy software components into configurable sources,
-keeping variant-specific functionality, to maximize reuse and reduce maintenance
-effort. Although CMake is capable of handling very simple feature models with
-variables and template generators pretty well, a more complex feature model
-might require another tool to manage it. Our recommendation for complex feature
-model configurations is KConfig, `a domain specific language designed
-specifically for coding the Linux kernel variability model'~\cite[page
-3]{kconfigKernel}. KConfig is able to manage the complex design of the Linux
-kernel and it has enough functionality to work with most embedded applications.
-Additionally it is open-source and free to use for anyone. Alternative solutions
-might also solve the configuration purpose. Prominent examples are
-pure:variants~\cite{pureVariantsPureSystems} from pure systems or Gears from
-BigLever~\cite{gearsBigLever}. Both tools are known to be highly flexible and
-easy to integrate into existing projects~\cite{confsplcGrunerBKR20}.
+step can begin. With the following three stages it is possible to switch from a
+project to a product perspective. The goal is to merge the legacy sources into
+configurable sources, keeping variant-specific functionality, to maximize reuse
+and reduce maintenance effort. Thinking in terms of products rather than
+projects helps to reduce the LOC and maximizes the reuse across all variants. In
+order to build up software components, consisting of core assets and
+variant-specific functionalities, a feature model is required for configuring
+the software and thus controlling the execution flow.  Although CMake is capable
+of handling very simple feature models with variables and template generators
+pretty well, a more complex feature model might require another tool to manage
+it. Our recommendation for complex feature model configurations is KConfig, `a
+domain specific language designed specifically for coding the Linux kernel
+variability model'~\cite[page 3]{kconfigKernel}. KConfig is able to manage the
+complex design of the Linux kernel and it has enough functionality to work with
+most embedded applications. Additionally it is open-source and free to use for
+anyone. Alternative solutions might also solve the configuration purpose.
+Prominent examples are pure:variants~\cite{pureVariantsPureSystems} from pure
+systems or Gears from BigLever~\cite{gearsBigLever}. Both tools are known to be
+highly flexible and easy to integrate into existing
+projects~\cite{confsplcGrunerBKR20}.
 
-Independent of the feature model tool, the modularization process should be the same.
-All stages of the \textit{Modularization} step are visible in
-Figure~\ref{fig:step2Modularization} and will be further described in detail:
+Independent of the feature model tool the modularization process should be the
+same. All stages of the \textit{Modularization} step are visible in
+Figure~\ref{fig:step2Modularization} and will be further described in detail.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=1.0\columnwidth]{step2-modularization-flow.pdf}
-  \caption{Detailed stages of the \textit{Modularization} step.}
-  \Description{Detailed stages of the Modularization step.}
-  \label{fig:step2Modularization}
-\end{figure}
-
-\textbf{Migrate from legacy components into product components:} After the first
+\textbf{Migrate from legacy component to product component:} After the first
 step \textit{Complexity Reduction}, all source code files are located in a
-dedicated legacy directory. This legacy directory contains a folder for each
+dedicated legacy folder. This legacy folder contains a folder for each
 variant, holding all software components separately. Using a component in
 multiple variants is possible, but does not make much sense. There is no reason
-to share the variant component variant-a/component-1 also in variant-b. The
-components do not belong to a variant, but to the entire product. In this step,
-components are just moved into a generic source directory. The folder structure
-will change from:
+to share the variant component variant-a/component-1 also in variant-b. In this
+step, components are just moved into a generic source folder. The folder
+structure will change from:
 \begin{Verbatim}[frame=single,samepage=true]
 legacy/
   variant-a/
@@ -204,21 +195,20 @@ src/
     variant-a/
 \end{Verbatim}
 By doing this, all variants of one component, with the identical or very similar
-functionality, are moved to the same directory. Variants of a component residing
+functionality, are moved to the same folder. Variants of a component residing
 next to each other are easier to compare and to handle. This will enable reuse
-already, but without the following stages it has no positive effect on source
-code reduction or maintenance effort.
+already, but without the following stages it has no positive effect on LOC
+reduction or maintenance effort.
 
-\textbf{Remove duplicates and create core assets:} As a first step within this
-new structure, we recommend to clean up duplicates. Components are considered as
-duplicates if they are identical and no configuration is required. This is a
-fast and easy step for reuse and will not require additional knowledge on a
-feature model nor on the source code. Removing duplicates is followed by
-building up core assets and variant-specific functionality with a decorator
-pattern. The separation can be done on a function level. This approach is
-enabled by the build system and requires static function interface definitions.
-This way the core assets and the decorators can be developed without any need of
-conditional compiler directives. The concept is to create a:
+\textbf{Remove duplicates and derive core assets:} Within the new structure
+established in the previous stage, we recommend to clean up duplicate variants.
+Variants of a component are considered as duplicates if their source code is
+identical and no configuration is required. This is a fast and easy step for
+reuse and will not require additional knowledge on a feature model nor on the
+functionality. Removing duplicates is followed by separating core assets and
+variant-specific functionality with a decorator pattern. The separation can be
+done on a function level and requires static function interface definitions. The
+concept is to create a:
 \begin{itemize}
   \item core asset C file, which contains generic code across all variants,
         considered to be static,
@@ -227,33 +217,41 @@ conditional compiler directives. The concept is to create a:
         implementation of a function; the function signature must be identical
         for all variants and shall be defined in the according header file.
 \end{itemize}
-Like this it is possible to implement variant-specific differences in an
-object-oriented manner in C. The idea is to provide a common core asset, which
-is meant to stay unchanged, and additionally one interface with multiple
-decorators that extend the shared functionality. The feature model's
-responsibility is to take control of the underlying build system and configure
-the correct decorators. If a separation into core assets and decorators in
-individual files is not possible or not useful for any reason, another option
-would be to use a feature configuration with conditional preprocessor directives
-or runtime configuration. Toggle points in the code make it possible to select
-different implementations within the same C file.
+This way the core assets and the decorators can be developed without any need of
+conditional compiler directives. It is possible to implement variant-specific
+differences in an object-oriented manner in C. The idea is to provide a
+product-specific core asset and additionally one interface with multiple
+variant-specific decorators that extend the shared functionality. The feature
+model's responsibility is to take control of the underlying build system and
+configure the correct decorators. If a separation of core assets and
+decorators in individual files is not possible or not wanted for any reason,
+another option would be to use a feature configuration with conditional
+preprocessor directives or runtime configuration. Toggle points in the code make
+it possible to select different implementations within the same C file.
 
 \textbf{Refactor with focus on variability:} Last but not least, the code should
-be refactored according to variability. This is the first refactoring step which
-has a functional influence on the code. Previous steps only changed when and how
-the source code was compiled. This step is also important because of the mindset
-shift. One must stop thinking about project specific features and define
-component specific features relevant for the product family. Most of the legacy
-components do not support variant handling and might require substantial
-refactorings to have a meaningful feature set.
+be refactored according to variability. This is the first stage that has a
+functional impact on the code, and it requires a mindset change. One must stop
+thinking about project-specific features and define component-specific features
+relevant for the product family. Most of the legacy components do not support
+variability and might require substantial refactoring to have a meaningful
+feature set.
 
 We highly encourage to implement unit tests before the refactoring starts, if
-there are no unit tests available already. Even the non-functional refactorings
-can have effects on the compiled binaries and change the behavior, even though
-it was not intended by the developer. A feature model will generate many
-possibilities to configure the software, therefore unit tests covering all core
-assets and features will ensure that no functionality was broken and will reduce
-time in finding errors at a later development phase.
+there are no unit tests available already. Refactoring can have effects on the
+compiled binaries and change the behavior, even though it was not intended by
+the developer. A feature model will generate many possibilities to configure the
+software, therefore unit tests covering all core assets and features will ensure
+that no functionality was broken and will reduce time in finding errors at a
+later development phase.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=1.0\columnwidth]{step2-modularization-flow.pdf}
+  \caption{Detailed stages of the \textit{Modularization} step.}
+  \Description{Detailed stages of the Modularization step.}
+  \label{fig:step2Modularization}
+\end{figure}
 
 \subsection{Versioned Dependency Management}\label{dependencies}
 
