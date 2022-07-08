@@ -1,4 +1,5 @@
 /texmfs
+/*.bak
 /*.aux
 /*.log
 /*.out
@@ -6,5 +7,6 @@
 /*.blg
 /*.fdb_latexmk
 /*.fls
+/*.ts
 /*.synctex.gz
 /paper.pdf

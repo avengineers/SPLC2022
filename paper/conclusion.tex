@@ -1,4 +1,4 @@
-\section{Conclusion and Future Work}
+\section{Conclusion and Future Work}\label{conclusion}
 
 This work provides an iterative and incremental migration strategy towards SPL
 for the software of a real-world product family of an automotive supplier. We
@@ -15,40 +15,40 @@ With our proposal we:
   \item established a stable SPL with variants buildable at any time,
   \item reduced workload of developers by reducing the number of repositories,
   \item increased collaboration beyond project borders and
-  \item integrated all software sources of a product family into one git
+  \item integrated all software sources of a product family into one Git
         repository.
 \end{itemize}
 
-We implemented a build system with modern CMake fully supporting the concept of
-SPL variants.
-
 At the submission date's point of time we managed to proof about 50\% of our
-concept. The build system prototype required two persons full-time for six
-weeks, the implementation for migration step one and two required two persons
-full-time for three more months. Over a time frame of two months we
-incrementally added ten variants, while each import to the SPL was really fast
-due to the automated importing mechanism. We already started with
+concept. We implemented a build system with modern CMake fully supporting the
+concept of SPL variants. The build system prototype required two persons
+full-time for six weeks, the implementation for migration step one and two
+required two persons full-time for three more months. Over a time frame of two
+months we incrementally added ten variants, while each import to the SPL was
+really fast due to the automated importing mechanism. We already started with
 \textit{Modularization} of software components, but only converted a few
-components and begun with removing duplicates. Recently we focussed more on
+components and begun with removing duplicates. Recently we focused more on
 automation than on the SPL migration, as we saw more advantages there in the
 long run. The automation for CI/CD is helpful for the migration as well.
-Nevertheless, the build system requires some more features to be able to handle
-our migration step three and we plan to implement them in the coming months, in
-parallel to the \textit{Modularization} step of the software components.
 
-Additionally to the build system implementation and the actual migration of the
-embedded source code, it is required for us to qualify tools which have an
-impact on the created binaries or the processes to build them. This tool
+Nevertheless, the build system requires more features, e.g., a package manager
+for dependency handling and a unit test framework for Test Driven Development
+(TDD) to be able to support our migration steps two and three and we plan to
+implement them in the coming months, in parallel to the \textit{Modularization}
+of the software components. Additionally it is required to qualify tools which
+have an impact on the created binaries or the processes to build them. This tool
 qualification is requested by the ISO 26262 standard for safety reasons. We must
 take care that CMake, Ninja and KConfig are properly qualified. On the other
 hand, proprietary software might come with safety evaluations already. This
-should be kept in mind, when deciding for your tool landscape.
+should be kept in mind, when deciding for a future tool landscape.
 
 Besides all the discussed technical challenges, there were also social obstacles
-on the way to SPL. Fear was probably the strongest emotion we faced. At the
-beginning we were certain that all required build system features were
-implemented and we always had a backup plan to go back to the original
-repositories. There was no real threat and still no one had enough confidence to
-start the migration. Afterwards we do not see a reason for hesitation, but
+on the way to introduce an SPL.\@ Fear of change was probably the strongest
+emotion we faced. We feared the introduction of our SPL approach, although we
+were certain that all required build system features were implemented and we
+always had a backup plan to go back to the original repositories. On the other
+hand the development team had a lot of doubts to adapt fast enough to new tools
+and processes. There was no real threat and still no one had enough confidence
+to start the migration. Afterwards we do not see a reason for hesitation, but
 sometimes it simply needs someone brave in the team or someone pushing you. Our
 conclusion is: Just do it! And if you break it, make sure you can fix it fast!

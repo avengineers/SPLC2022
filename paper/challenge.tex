@@ -1,10 +1,10 @@
-\section{Challenge}
+\section{Challenge}\label{challenge}
 
-Our migration method is supposed to be a generic solution for a migration from a
-polyrepo project landscape to a monorepo SPL, but our circumstances might have
-some influence on the ideas that we share in this paper. This section will
-explain the challenges we had, both coming from the products' nature and its
-industry and also from our corporate processes and strategies.
+Our migration method is supposed to be a generic solution, but our company's
+circumstances might have some influence on the ideas that we share in this
+paper. This section will explain the challenges we had, both coming from the
+products' nature and its industry and also from our corporate processes and
+strategies.
 
 The projects that we migrated are in the area of electric cars for premium
 automobile manufacturers. The software is written in (Embedded) C and Matlab and
@@ -29,7 +29,7 @@ cluster. For historic reasons every (customer) project was managed as a separate
 Dimensions repository. Dimensions is a Source Code Management (SCM) system
 similar to Revision Control System (RCS) used at the Marquardt GmbH for source
 code administration and project documentation. Each individual source code
-repository is a self-contained ready to build project, including all required
+repository is a self-contained ready-to-build project, including all required
 tools and libraries to build the product binaries, like compilers, MSYS and GNU
 Make. The C code was validated with Jenkins nightly builds. Those Jenkins
 scripts were located in separate repositories, not part of the project's
@@ -41,7 +41,7 @@ new software project. This software project then started as a clone of another
 already existing project (`clone-and-own'). This approach had several benefits:
 the setup time was short and because a mature project was taken as basis, the
 project's software was stable already and debugging and adapting was possible.
-There was less work for generic parts and only hardware and customer specific
+There was less work for generic parts and only hardware and customer-specific
 modifications were required. However, this approach also caused a lot of
 disadvantages. By simply cloning an existing project there was not only a copy
 of functionality available in the new project, but also a copy of all its flaws.

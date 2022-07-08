@@ -66,31 +66,19 @@
 \newpage
 
 \begin{abstract}
-    As with every business, being profitable does not ensure to remain
-    competitive in the future. A competitive advantage requires a fast adaption
-    to the market, to the regulations and customer needs. In the automotive
-    industry, suppliers aim to increase their revenue and try to keep up with
-    the pace of the market trends to stay competitive by offering off-the-shelf
-    products to car manufacturers, whereas the OEMs themselves request tailored
-    products to gain unique selling points. Each new customer project may result
-    in a new software project. To save time one might find it a good idea to
-    create the new software project as a copy of an older one. Starting a new
-    software project based on another one guarantees initial functionality, but
+    In the automotive industry, suppliers aim to increase their revenue and try
+    to keep up with the pace of the market trends to stay competitive by
+    offering off-the-shelf products to car manufacturers. On the other hand
+    those car manufacturers request tailored products to gain unique selling
+    points. Each new customer request may result in a new software project. To
+    save time one might find it a good idea to create the new software project
+    as a copy of an older one. This method guarantees initial functionality, but
     prevents refactoring and leads to continuous software erosion. The
-    implementations diverge from each other and improvements cannot be shared in
-    all customer projects. Software Product Lines (SPL) can help to maximize
-    reusability and quality by building up shared core assets and
-    customer-specific functionality. However, migrating active projects into an
-    SPL can be a risky task due to release schedules. The migration is
-    especially risky if a big bang transition is the only option. In our paper,
-    we propose a method to migrate a customer project landscape into a scalable
-    SPL in three steps: (1) \textit{Complexity Reduction} by reorganizing the
-    multiple repositories (polyrepo) to a single repository (monorepo) with a
-    new build system, (2) \textit{Modularization} by building up core assets and
-    making them configurable, (3) \textit{Versioned Dependency Management} to
-    allow reuse of versioned components across our product portfolio. This
-    migration is possible in everyone's own pace \textendash{} incrementally,
-    iteratively and decentrally.
+    implementations diverge from each other and improvements cannot be shared.
+    Software Product Lines (SPL) can help to maximize reusability and quality by
+    building up shared core assets and customer-specific functionality. In our
+    paper, we propose a method to migrate a customer project landscape into a
+    scalable SPL in three steps.
 \end{abstract}
 
 \begin{CCSXML}
@@ -137,7 +125,7 @@
 \input{solution.tex}
 \input{conclusion.tex}
 
-\balance
+\balance{}
 
 \bibliographystyle{ACM-Reference-Format}
 
